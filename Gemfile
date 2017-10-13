@@ -9,6 +9,7 @@ gem 'rake'
 gem 'dotenv'
 gem 'jekyll'
 gem 'rouge'
+gem 'rufus-scheduler'
 
 group :development do
   gem 'rspec'

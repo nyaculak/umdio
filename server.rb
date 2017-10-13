@@ -11,6 +11,9 @@ require 'sinatra/param'
 require 'sinatra/namespace'
 require 'mongo'
 require 'json'
+require 'rufus-scheduler'
+
+require_relative 'app/scrapers/courses_scraper.rb'
 
 include Mongo
 
@@ -20,7 +23,17 @@ class UMDIO < Sinatra::Base
 
   # fix strange scraper bug by explicitly setting the server
   # reference: http://stackoverflow.com/questions/17334734/how-do-i-get-sinatra-to-work-with-httpclient
-  
+
+  # Rufus Scheduler to schedule tasks (like scraping) to run periodically
+  puts 'Creating Scheduler'
+  scheduler = Rufus::Scheduler.new
+
+  puts 'Running Scheduler'
+  scheduler.every '5m' do
+    puts 'Scheduled Task'
+    scrape_courses("201801")
+  end
+
   
   configure do
     # set up mongo database - code from ruby mongo driver tutorial
@@ -38,6 +51,8 @@ class UMDIO < Sinatra::Base
     # TODO: fix weird namespace conflict and install better_errors
     use BetterErrors::Middleware
     BetterErrors.application_root = __dir__
+
+    enable :logging, :dump_errors, :raise_errors
   end
 
   # before application/request starts
