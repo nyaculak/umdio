@@ -9,6 +9,8 @@ gem 'rake'
 gem 'dotenv'
 gem 'jekyll'
 gem 'rouge'
+gem 'figaro'
+gem 'activesupport'
 
 group :development do
   gem 'rspec'

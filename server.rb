@@ -11,6 +11,7 @@ require 'sinatra/param'
 require 'sinatra/namespace'
 require 'mongo'
 require 'json'
+require 'figaro'
 
 include Mongo
 
@@ -20,9 +21,11 @@ class UMDIO < Sinatra::Base
 
   # fix strange scraper bug by explicitly setting the server
   # reference: http://stackoverflow.com/questions/17334734/how-do-i-get-sinatra-to-work-with-httpclient
-  
-  
+
   configure do
+    Figaro.application = Figaro::Application.new(path: "./config/application.yml")
+    Figaro.load
+
     # set up mongo database - code from ruby mongo driver tutorial
     host = ENV['MONGO_RUBY_DRIVER_HOST'] || 'localhost'
     port = ENV['MONGO_RUBY_DRIVER_PORT'] || MongoClient::DEFAULT_PORT
@@ -62,6 +65,7 @@ class UMDIO < Sinatra::Base
   helpers Sinatra::Param
 
   # register the routes
+  register Sinatra::UMDIO::Routing::Weather
   register Sinatra::UMDIO::Routing::Professors
   register Sinatra::UMDIO::Routing::Courses
   register Sinatra::UMDIO::Routing::Bus

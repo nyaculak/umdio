@@ -22,3 +22,6 @@ mime.types
 
 # editor configurations
 .idea/
+
+# Ignore application configuration
+/config/application.yml

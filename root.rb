@@ -43,6 +43,11 @@ module Sinatra
                   url: 'http://api.umd.io/v0/map',
                   docs: 'http://umd.io/map/'
                 },
+                {
+                  name: 'Weather',
+                  url: 'http://api.umd.io/v0/weather',
+                  docs: 'http://umd.io/weather'
+                }
               ]
             }
             json resp

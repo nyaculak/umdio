@@ -16,5 +16,14 @@ We use the [MIT License](./LICENSE) - do what you want, but don't hold us liable
 2. Install docker-compose
 3. Run `docker-compose up`
    * You might need to run docker-related commands with sudo if you're a linux user
-   * When working with the database over docker, you need to specify the environment variable
-     `MONGO_RUBY_DRIVER_HOST=mongodb`
+
+## Setting up your environment variables with Figaro
+1. We use Figaro to manage environment variables, like api keys
+2. Create a file called `config/application.yml` under the root directory
+3. Variables defined here are automatically loaded as environment variables into the app
+
+### Configuring Open Weather Map
+To get the weather endpoint working, you need to provide an API key for Open Weather Map in the `config/application.yml` file
+1. [Obtain an api key](http://openweathermap.org/appid)
+2. Add the api key to the `config/application.yml` file
+    * OWM_API_KEY: "my_api_key"

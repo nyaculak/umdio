@@ -15,7 +15,7 @@ kramdown:
 source: .
 destination: ../public
 sass:
-  sass_dir: _sass
+  sass_dir: ./_sass
   style: :compressed
 highlighter: rouge
 
